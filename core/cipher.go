@@ -32,10 +32,11 @@ var aeadList = map[string]struct {
 	KeySize int
 	New     func([]byte) (shadowaead.Cipher, error)
 }{
-	"AEAD_AES_128_GCM":       {16, shadowaead.AESGCM},
-	"AEAD_AES_192_GCM":       {24, shadowaead.AESGCM},
-	"AEAD_AES_256_GCM":       {32, shadowaead.AESGCM},
-	"AEAD_CHACHA20_POLY1305": {32, shadowaead.Chacha20Poly1305},
+	"AEAD_AES_128_GCM":        {16, shadowaead.AESGCM},
+	"AEAD_AES_192_GCM":        {24, shadowaead.AESGCM},
+	"AEAD_AES_256_GCM":        {32, shadowaead.AESGCM},
+	"AEAD_CHACHA20_POLY1305":  {32, shadowaead.Chacha20Poly1305},
+	"AEAD_XCHACHA20_POLY1305": {32, shadowaead.XChacha20Poly1305},
 }
 
 // List of stream ciphers: key size in bytes and constructor
@@ -76,6 +77,8 @@ func PickCipher(name string, key []byte, password string) (Cipher, error) {
 		return &dummy{}, nil
 	case "CHACHA20-IETF-POLY1305":
 		name = "AEAD_CHACHA20_POLY1305"
+	case "XCHACHA20-IETF-POLY1305":
+		name = "AEAD_XCHACHA20_POLY1305"
 	case "AES-128-GCM":
 		name = "AEAD_AES_128_GCM"
 	case "AES-196-GCM":
