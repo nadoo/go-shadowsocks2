@@ -32,10 +32,13 @@ var aeadList = map[string]struct {
 	KeySize int
 	New     func([]byte) (shadowaead.Cipher, error)
 }{
-	"AEAD_AES_128_GCM":        {16, shadowaead.AESGCM},
-	"AEAD_AES_192_GCM":        {24, shadowaead.AESGCM},
-	"AEAD_AES_256_GCM":        {32, shadowaead.AESGCM},
-	"AEAD_CHACHA20_POLY1305":  {32, shadowaead.Chacha20Poly1305},
+	"AEAD_AES_128_GCM":       {16, shadowaead.AESGCM},
+	"AEAD_AES_192_GCM":       {24, shadowaead.AESGCM},
+	"AEAD_AES_256_GCM":       {32, shadowaead.AESGCM},
+	"AEAD_CHACHA20_POLY1305": {32, shadowaead.Chacha20Poly1305},
+
+	// http://shadowsocks.org/en/spec/AEAD-Ciphers.html
+	// not listed in spec
 	"AEAD_XCHACHA20_POLY1305": {32, shadowaead.XChacha20Poly1305},
 }
 
@@ -52,7 +55,11 @@ var streamList = map[string]struct {
 	"AES-256-CFB":   {32, shadowstream.AESCFB},
 	"CHACHA20-IETF": {32, shadowstream.Chacha20IETF},
 	"XCHACHA20":     {32, shadowstream.Xchacha20},
-	"CHACHA20":      {32, shadowstream.ChaCha20},
+
+	// http://shadowsocks.org/en/spec/Stream-Ciphers.html
+	// marked as "DO NOT USE"
+	"CHACHA20": {32, shadowstream.ChaCha20},
+	"RC4-MD5":  {16, shadowstream.RC4MD5},
 }
 
 // ListCipher returns a list of available cipher names sorted alphabetically.
