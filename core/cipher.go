@@ -71,6 +71,7 @@ func ListCipher() []string {
 	for k := range streamList {
 		l = append(l, k)
 	}
+	l = append(l, "DUMMY")
 	sort.Strings(l)
 	return l
 }
