@@ -64,14 +64,13 @@ var streamList = map[string]struct {
 
 // ListCipher returns a list of available cipher names sorted alphabetically.
 func ListCipher() []string {
-	var l []string
+	l := []string{"DUMMY"}
 	for k := range aeadList {
 		l = append(l, k)
 	}
 	for k := range streamList {
 		l = append(l, k)
 	}
-	l = append(l, "DUMMY")
 	sort.Strings(l)
 	return l
 }
